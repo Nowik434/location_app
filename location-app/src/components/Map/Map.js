@@ -55,11 +55,11 @@ export const Map = compose(
 
 
 const MyMap = () => {
-    const markers = useSelector((state) => state.markersReducer.places);
-    const currentPin = useSelector((state) => state.markersReducer.currentPin);
-    console.log(markers, currentPin)
+    const users = useSelector((state) => state.usersReducer.places);
+    const currentPin = useSelector((state) => state.usersReducer.currentPin);
+    console.log(users, currentPin)
     return (
-        <Map places={markers} currentPin={currentPin} />
+        <Map places={users} currentPin={currentPin} />
     );
 }
 

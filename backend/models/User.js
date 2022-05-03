@@ -20,6 +20,29 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 6,
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    long: {
+      type: Number,
+      required: true,
+    },
+    lat: {
+      type: Number,
+      required: true,
+    },
+    userType: {
+      type: String,
+      required: true,
+    },
+    topics: {
+      type: Array,
+    },
   },
   { timestamps: true }
 );

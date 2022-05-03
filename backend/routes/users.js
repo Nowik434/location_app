@@ -1,6 +1,19 @@
 const User = require("../models/User");
+const Users = require("../models/Users");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+
+// GET
+router.get("/", async (req, res) => {
+  try {
+    const users = await Users.find().select('username email firstName lastName long lat userType topics');;
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -14,6 +27,12 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      long: req.body.long,
+      lat: req.body.lat,
+      userType: req.body.userType,
+      topics: []
     });
 
     //save user and respond
@@ -40,7 +59,16 @@ router.post("/login", async (req, res) => {
     !validPassword && res.status(400).json("Wrong username or password");
 
     //send response
-    res.status(200).json({ _id: user._id, username: user.username });
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      long: user.long,
+      lat: user.lat,
+      userType: user.userType,
+      topics: user.topics
+    });
   } catch (err) {
     res.status(500).json(err);
   }

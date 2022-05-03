@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/usersSlice';
+import { useNavigate} from "react-router-dom"
 
 function Copyright(props) {
     return (
@@ -32,6 +33,7 @@ const theme = createTheme();
 
 export default function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // const myStorage = window.localStorage;
 
     const handleSubmit = (event) => {
@@ -41,11 +43,9 @@ export default function Login() {
         dispatch(loginUser({
             email: data.get('email'),
             password: data.get('password'),
-        }));
-        // console.log({
-        //     email: data.get('email'),
-        //     password: data.get('password'),
-        // });
+        })).then(()=>{
+            navigate('/');
+        });
     };
 
     return (
